@@ -6,3 +6,10 @@ Chapter 2 Templates:
 
 ![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/4dbe8aed-c904-42eb-b5d0-96784f72b780)
 
+Chapter 3 Web forms:
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/1365323b-20f6-47aa-9a1c-009b366412cb)]
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/91975d22-0689-4963-9c74-b72edc89bbce)
+
+
