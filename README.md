@@ -18,15 +18,29 @@ Chapter 4 Database
 
 Chapter 5 Login form:
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/f38008da-5f64-4f3f-9977-fac378f6220e/c012b5c5-0a16-4680-ae88-6a929e8864f3/Untitled.png)
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/f3d1c754-3954-4438-a294-7f6d99230bb6)
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/e672e376-5637-44a3-87b4-0fb877b17061)
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/d01f748e-6fc1-407c-b622-f4c2c7ce4222)
+
+
+pip install list:
 
 pip install flask
+
 pip install flask_migrate
+
 pip install flask_login
+
 pip install flask_login
+
 flask_wtf
+
 RegistrationForm
+
 pip install email-validator
+
 pip install flask-sqlalchemy
 pip install flask-migrate
 pip install python-dotenv
