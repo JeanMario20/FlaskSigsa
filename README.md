@@ -16,13 +16,42 @@ Chapter 4 Database
 
 ![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/b0e5de17-167a-4e65-a078-4c3edfcbc63b)
 
+Chapter 5 Login form:
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/f3d1c754-3954-4438-a294-7f6d99230bb6)
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/e672e376-5637-44a3-87b4-0fb877b17061)
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/d01f748e-6fc1-407c-b622-f4c2c7ce4222)
+
+
+pip install list:
+
+Chapter 5 Login form:
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/f3d1c754-3954-4438-a294-7f6d99230bb6)
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/e672e376-5637-44a3-87b4-0fb877b17061)
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/d01f748e-6fc1-407c-b622-f4c2c7ce4222)
+
+
+pip install list:
+
 python -m venv venv
 pip install flask
+
 pip install flask_migrate
+
 pip install flask_login
+
 pip install flask_login
+
 pip install flask_wtf
+
+
 pip install email-validator
+
 pip install flask-sqlalchemy
 pip install flask-migrate
 pip install python-dotenv
