@@ -16,4 +16,13 @@ Chapter 4 Database
 
 ![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/b0e5de17-167a-4e65-a078-4c3edfcbc63b)
 
-
+pip install flask
+pip install flask_migrate
+pip install flask_login
+pip install flask_login
+flask_wtf
+RegistrationForm
+pip install email-validator
+pip install flask-sqlalchemy
+pip install flask-migrate
+pip install python-dotenv

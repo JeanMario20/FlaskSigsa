@@ -3,7 +3,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app import app, db
 from app.models import Usuario
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrarForm
 from urllib.parse import urlsplit
 
 
@@ -50,9 +50,9 @@ def login():
 def registrar():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    form = RegistrationForm()
+    form = RegistrarForm()
     if form.validate_on_submit():
-        usuario = Usuario(nombreUsuario = form.usuarioNombre.data, correo = form.correo.data)
+        usuario = Usuario(nombreUsuario = form.nombreUsuario.data, correo = form.correo.data)
         usuario.set_contrasena(form.contrasena.data)
         db.session.add(usuario)
         db.session.commit()
