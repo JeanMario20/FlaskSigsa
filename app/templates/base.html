@@ -11,8 +11,12 @@
 </head>
 <body>
     <div>SisgaBlog:
-        <a href="{{url_for('index')}}">Home</a>
+        <a href="{{url_for('index')}}">Inicio</a>
+        {% if current_user.is_anonymous %}
         <a href="{{url_for('login')}}">Inicio de sesion</a>
+        {% else %}
+        <a href="{{url_for('Cerrar_sesion')}}">cerrar sesion</a>
+        {% endif %}
     </div>
 
     <hr>

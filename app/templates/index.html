@@ -12,7 +12,7 @@
 <body>
     {% extends "base.html" %}
     {% block content %}
-        <h1>Hola, {{ usuario.nombre }}</h1>
+        <h1>Hola, {{ current_user.nombreUsuario }}</h1>
         {% for Post in Posts %}
         <div><p>{{ Post.autor.usuarioNombre }} dice: <b> {{ Post.contenido }} </b></p></div>
         {% endfor %}
