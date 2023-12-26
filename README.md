@@ -16,12 +16,12 @@ Chapter 4 Database
 
 ![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/b0e5de17-167a-4e65-a078-4c3edfcbc63b)
 
+python -m venv venv
 pip install flask
 pip install flask_migrate
 pip install flask_login
 pip install flask_login
-flask_wtf
-RegistrationForm
+pip install flask_wtf
 pip install email-validator
 pip install flask-sqlalchemy
 pip install flask-migrate

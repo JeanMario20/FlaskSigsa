@@ -31,7 +31,7 @@ def login():
     if form.validate_on_submit():
 
         usuario = db.session.scalar(sa.select(Usuario).where(Usuario.nombreUsuario == form.nombreUsuario.data))
-        if usuario is None or not usuario.check_password(form.password.data):
+        if usuario is None or not usuario.check_password(form.contrasena.data):
             flash("nombre de usuario o contrasena invalida.")
             return redirect(url_for('login'))
         login_user(usuario, recuerdame = form.recuerda_me.data)
@@ -39,7 +39,7 @@ def login():
         next_page = request.args.get('next')
         if not next_page or urlsplit(next_page).netloc != '':
             next_page = url_for('index')
-        return redirect(url_for('index'))
+        return redirect(next_page)
     
         #flash('inicio de sesion para el usuario {}, contrasena={}'.format
         #        (form.nombreUsuario.data, form.contrasena.data,form.recuerda_me.data))
@@ -65,4 +65,12 @@ def cerrar_sesion():
     logout_user()
     return redirect(url_for('index'))
 
-
+@app.route('/usuario/<nombreUsuario>')
+@login_required
+def usuario(nombreUsuario):
+    usuario = db.first_or_404(sa.select(Usuario).where(Usuario.nombreUsuario == nombreUsuario))
+    posts = [
+        {'author': usuario, 'body': 'Test post #1'},
+        {'author': usuario, 'body': 'Test post #2'}
+    ]
+    return render_template('user.html', usuario=usuario, posts=posts)
