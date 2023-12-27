@@ -26,15 +26,16 @@ def index():
 @app.route('/login', methods=['GET','POST'])
 def login():
     if current_user.is_authenticated:
+        print('aqui')
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
 
         usuario = db.session.scalar(sa.select(Usuario).where(Usuario.nombreUsuario == form.nombreUsuario.data))
-        if usuario is None or not usuario.check_password(form.contrasena.data):
+        if usuario is None or not usuario.check_contrasena(form.contrasena.data):
             flash("nombre de usuario o contrasena invalida.")
             return redirect(url_for('login'))
-        login_user(usuario, recuerdame = form.recuerda_me.data)
+        login_user(usuario, remember = form.recuerda_me.data)
 
         next_page = request.args.get('next')
         if not next_page or urlsplit(next_page).netloc != '':

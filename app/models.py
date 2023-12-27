@@ -19,10 +19,10 @@ class Usuario (UserMixin, db.Model):
         return '<usuario {}>' .format(self.nombreUsuario)
     
     def set_contrasena(self, contrasena):
-        self.password_hash = generate_password_hash(contrasena)
+        self.contrasena_hash = generate_password_hash(contrasena)
 
-    def check_contrasena_hash(self ,password):
-        return check_password_hash(self.password_hash, password)
+    def check_contrasena(self, contrasena):
+        return check_password_hash(self.contrasena_hash, contrasena)
 
 class Post(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
