@@ -35,6 +35,12 @@ Chapter 5 Login form:
 
 ![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/d01f748e-6fc1-407c-b622-f4c2c7ce4222)
 
+Chapter 6: 
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/44bc63ea-5ce6-4947-b19a-15e98362dad1)
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/1d4dd371-219d-4a9a-aecb-e58f508bf99c)
+
 
 pip install list:
 
