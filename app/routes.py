@@ -3,8 +3,9 @@ from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app import app, db
 from app.models import Usuario
-from app.forms import LoginForm, RegistrarForm
+from app.forms import LoginForm, RegistrarForm, EditarPerfilForm
 from urllib.parse import urlsplit
+from datetime import datetime, timezone
 
 
 @app.route('/')
@@ -71,7 +72,28 @@ def cerrar_sesion():
 def usuario(nombreUsuario):
     usuario = db.first_or_404(sa.select(Usuario).where(Usuario.nombreUsuario == nombreUsuario))
     posts = [
-        {'author': usuario, 'body': 'Test post #1'},
-        {'author': usuario, 'body': 'Test post #2'}
+        {'autor': usuario, 'contenido': 'Test post #1'},
+        {'autor': usuario, 'contenido': 'Test post #2'}
     ]
-    return render_template('user.html', usuario=usuario, posts=posts)
+    return render_template('usuario.html', usuario=usuario, posts=posts)
+
+@app.before_request
+def registrar_ultima_conexion():
+    if current_user.is_authenticated:
+        current_user.ultima_conexion = datetime.now(timezone.utc)
+        db.session.commit()
+
+@app.route('/editar_perfil', methods = ['GET','POST'])
+@login_required
+def editar_perfil():
+    formulario = EditarPerfilForm()
+    if formulario.validate_on_submit():
+        current_user.nombreUsuario = formulario.nombreUsuario.data
+        current_user.acerca_mi = formulario.acerca_mis.data
+        db.session.commit()
+        flash("tus cambios han sido guardados ")
+        return redirect(url_for('editar_perfil'))
+    elif request.method =='GET':
+        formulario.nombreUsuario.data = current_user.nombreUsuario
+        formulario.acerca_mi = current_user.acerca_mi
+    return render_template("editar_perfil.html", title="Editar perfil" , formulario = formulario)

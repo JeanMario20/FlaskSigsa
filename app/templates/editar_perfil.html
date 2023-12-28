@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Editar perfil</h1>
+    <form action="" method="post">
+        {{ formulario.hidden_tag() }}
+        <p>
+            {{ formulario.nombreUsuario.label }} <br>
+            {{ formulario.nombreUsuario(size=32 )}} <br>
+            {% for error in formulario.nombreUsuario.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ formulario.acerca_mi.label }} <br>
+            {{ formulario.acerca_mis(cols = 50, rows = 4) }} <br>
+            {% for error in formulario.acerca_mi.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ formulario.enviar() }}</p>
+    </form>
+{% endblock %}
+
