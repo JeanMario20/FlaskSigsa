@@ -32,3 +32,13 @@ class EditarPerfilForm(FlaskForm):
     nombreUsuario = StringField("Nombre de usuario ", validators=[DataRequired()])
     acerca_mis = TextAreaField("Acerca de mi", validators=[Length(min=0, max=140)])
     enviar = SubmitField('Enviar')
+
+    def __init__(self, original_username, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.original_username = original_username
+
+    def validar_nombreUsuario(self, nombreUsuario):
+        if nombreUsuario != self.original_username:
+            usuario = db.session.scalar(sa.select(Usuario).where(Usuario.nombreUsuario == self.nombreUsuario.data))
+            if usuario is not None:
+                raise ValidationError('el nombre de usuario ya esta en uso porfavor usa un nombre de usuario diferente')

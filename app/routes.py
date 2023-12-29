@@ -56,6 +56,7 @@ def registrar():
     if form.validate_on_submit():
         usuario = Usuario(nombreUsuario = form.nombreUsuario.data, correo = form.correo.data)
         usuario.set_contrasena(form.contrasena.data)
+        form.validar_nuevo_usuario(form.nombreUsuario)
         db.session.add(usuario)
         db.session.commit()
         flash("felicitaciones, ahora eres un usuario registrado")
@@ -86,9 +87,10 @@ def registrar_ultima_conexion():
 @app.route('/editar_perfil', methods = ['GET','POST'])
 @login_required
 def editar_perfil():
-    formulario = EditarPerfilForm()
+    formulario = EditarPerfilForm(current_user.nombreUsuario)
     if formulario.validate_on_submit():
         current_user.nombreUsuario = formulario.nombreUsuario.data
+        formulario.validar_nombreUsuario(formulario.nombreUsuario.data)
         current_user.acerca_mi = formulario.acerca_mis.data
         db.session.commit()
         flash("tus cambios han sido guardados ")
