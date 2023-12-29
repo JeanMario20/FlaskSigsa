@@ -43,7 +43,8 @@ Chapter 6:
 
 Chapter 7:
 
-![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/05977021-808a-4227-80a3-edc56add140a)
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/2dc8c1af-438f-4cdc-88a3-12dfa3a30067)
+
 
 pip install list:
 
