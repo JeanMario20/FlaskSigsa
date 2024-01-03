@@ -110,15 +110,15 @@ def follow(nombreUsuario):
         nombreUsuario = db.session.scalar(
             sa.select(Usuario).where(Usuario.nombreUsuario == nombreUsuario))
         if nombreUsuario is None:
-            flash(f'usuario {usuario} not found.')
+            flash(f'usuario {nombreUsuario} not found.')
             return redirect(url_for('index'))
         if nombreUsuario == current_user:
             flash('You cannot follow yourself!')
             return redirect(url_for('usuario', nombreUsuario=nombreUsuario))
         current_user.follow(nombreUsuario)
         db.session.commit()
-        flash(f'You are following {usuario}!')
-        return redirect(url_for('usuario', nombreUsuario=nombreUsuario))
+        flash(f'You are following {nombreUsuario}!')
+        return redirect(url_for('index', nombreUsuario=nombreUsuario))
     else:
         return redirect(url_for('index'))
 
@@ -138,6 +138,6 @@ def unfollow(nombreUsuario):
         current_user.unfollow(nombreUsuario)
         db.session.commit()
         flash(f'You are not following {nombreUsuario}.')
-        return redirect(url_for('usuario', nombreUsuario=nombreUsuario))
+        return redirect(url_for('index', nombreUsuario=nombreUsuario))
     else:
         return redirect(url_for('index'))
