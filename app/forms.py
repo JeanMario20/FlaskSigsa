@@ -45,3 +45,7 @@ class EditarPerfilForm(FlaskForm):
 
 class EmptyForm(FlaskForm):
     enviar = SubmitField('Enviar')
+
+class PostForm(FlaskForm):
+    post = TextAreaField("En que estas pensando ?" , validators=[DataRequired(), Length(min = 1, max = 140)])
+    enviar = SubmitField("Enviar")

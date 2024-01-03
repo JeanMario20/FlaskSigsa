@@ -2,27 +2,46 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app import app, db
-from app.models import Usuario
-from app.forms import LoginForm, RegistrarForm, EditarPerfilForm, EmptyForm
+from app.models import Usuario, Post
+from app.forms import LoginForm, RegistrarForm, EditarPerfilForm, EmptyForm, PostForm
 from urllib.parse import urlsplit
 from datetime import datetime, timezone
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods = ['GET', 'POST'])
+@app.route('/index', methods = ['GET', 'POST'])
 @login_required
 def index():
-    Posts = [
-        {
-            'autor': {'usuarioNombre': 'Hugo'},
-            'contenido': 'Beautiful day in portland!'
-        },
-        {
-            'autor': {'usuarioNombre': 'Pedro'},
-            'contenido': 'the avengers movie was so cool'
-        }
-    ]
-    return render_template('index.html', title='home', Posts=Posts)
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(contenido = form.post.data, autor = current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash("Tu contenido a sido subido ahora se muestra a todo el mundo")
+        return redirect(url_for('index'))
+    page = request.args.get('page', 1, type=int)
+    posts = db.paginate(current_user.following_posts(), page = page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+
+    next_url = url_for('index', page = posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('index', page = posts.prev_num) \
+        if posts.has_prev else None
+    
+    return render_template('index.html', title='home', form = form ,posts=posts.items, next_url = next_url, prev_url = prev_url)
+
+@app.route('/explore')
+@login_required
+def explore():
+    page = request.args.get('page', 1, type=int)
+    query = sa.select(Post).order_by(Post.tiempo_publicado.desc())
+    posts = db.paginate(query, page = page, per_page = app.config['POSTS_PER_PAGE'], error_out=False)
+
+    next_url = url_for('explore', page = posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('explore', page = posts.prev_num) \
+        if posts.has_prev else None
+    
+    return render_template('index.html', title = 'explore', posts = posts.items, next_url = next_url, prev_url = prev_url)
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -73,10 +92,14 @@ def cerrar_sesion():
 def usuario(nombreUsuario):
     
     usuario = db.first_or_404(sa.select(Usuario).where(Usuario.nombreUsuario == nombreUsuario))
-    posts = [
-        {'autor': usuario, 'contenido': 'Test post #1'},
-        {'autor': usuario, 'contenido': 'Test post #2'}
-    ]
+    page = request.args.get('page', 1, type = int)
+    query = usuario.posts.select().order_by(Post.tiempo_publicado.desc())
+    posts = db.paginate(query, page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+    
+    next_url = url_for('usuario', nombreUsuario = usuario.nombreUsuario, page = posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('Usuario', nombreUsuario = Usuario.nombreUsuario, page = posts.prev_num)  \
+        if posts.has_prev else None
     form = EmptyForm()
     return render_template('usuario.html', usuario=usuario, posts=posts, form = form)
 

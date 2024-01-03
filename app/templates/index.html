@@ -1,21 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% if title %}
-    <title>{{ title }} - SisgaBlog</title>
-    {% else %}
-    <title>Welcome to SisgaBlog</title>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hola, {{current_user.nombreUsuario}} </h1>
+    {% if form %}
+    <form action="" method = "post">
+        {{ form.hidden_tag()}}
+        <p>
+            {{ form.post.label }} <br>
+            {{ form.post(cols = 32, rows = 4) }} <br>
+            {% for error in form.post.errors %}
+            <span style="color: red;"> [{{ error }}] </span>
+            {% endfor %}
+        </p>
+        <p>{{ form.enviar() }}</p>
+    </form>
     {% endif %}
-</head>
-<body>
-    {% extends "base.html" %}
-    {% block content %}
-        <h1>Hola, {{ current_user.nombreUsuario }}</h1>
-        {% for Post in Posts %}
-        <div><p>{{ Post.autor.nombreUsuario }} dice: <b> {{ Post.contenido }} </b></p></div>
-        {% endfor %}
-    {% endblock %}
-</body>
-</html>
+    {% for post in posts %}
+    <p>
+        {% include '_post.html' %}
+    </p>
+    {% endfor %}
+    {% if prev_url %}
+    <a href="{{ prev_url }}">nuevos post</a>
+    {% endif %}
+    {% if next_url %}
+    <a href="{{ next_url }}">Older posts</a>
+    {% endif %}
+{% endblock %}
