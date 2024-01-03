@@ -45,6 +45,15 @@ Chapter 7:
 
 ![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/2dc8c1af-438f-4cdc-88a3-12dfa3a30067)
 
+Chapter 8: 
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/b258d5fa-3ca9-4939-9485-5029b85a7a3e)
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/e7fc9be4-cbab-4148-8b69-0712bc24d6ea)
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/49a2e662-9fbe-46c0-a9d2-a38a4cd2ac63)
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/713b65e8-c454-41b2-9722-01a48fca399f)
 
 pip install list:
 
