@@ -7,8 +7,23 @@
                 <h1>Usuario: {{usuario.nombreUsuario }}</h1>
                 {% if usuario.acerca_mi %} <p> {{ usuario.acerca_mi }}</p>{% endif %}
                 {% if usuario.ultima_conexion %} <p>Ultima conexion: {{ usuario.ultima_conexion }}</p>{% endif %}
+                <p>{{ usuario.followers_count() }} Followers, {{ usuario.following_count() }} followings</p>
                 {% if usuario == current_user %}
                 <p><a href="{{ url_for('editar_perfil') }}">Editar perfil</a></p>
+                {% elif not current_user.is_following(usuario) %}
+                <p>
+                    <form action="{{ url_for('follow', nombreUsuario = usuario.nombreUsuario) }}" method="post">
+                        {{ form.hidden_tag() }}
+                        {{ form.enviar(value= 'follow')}}
+                    </form>
+                </p>
+                {% else %}
+                <p>
+                    <form action="{{ url_for('unfollow', nombreUsuario = usuario.nombreUsuario) }}" method="post">
+                        {{ form.hidden_tag() }}
+                        {{ form.enviar(value= 'unfollow')}}
+                    </form>
+                </p>
                 {% endif%}
             </td>
         </tr>

@@ -42,3 +42,6 @@ class EditarPerfilForm(FlaskForm):
             usuario = db.session.scalar(sa.select(Usuario).where(Usuario.nombreUsuario == self.nombreUsuario.data))
             if usuario is not None:
                 raise ValidationError('el nombre de usuario ya esta en uso porfavor usa un nombre de usuario diferente')
+
+class EmptyForm(FlaskForm):
+    enviar = SubmitField('Enviar')

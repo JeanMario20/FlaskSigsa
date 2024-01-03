@@ -29,3 +29,6 @@ if not app.debug:
     app.logger.info("Sigsablog startup")
 
 from app import routes, models, errors
+
+if __name__ == '__main__':
+    app.run(debug=True)
