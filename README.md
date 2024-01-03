@@ -55,6 +55,12 @@ Chapter 8:
 
 ![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/713b65e8-c454-41b2-9722-01a48fca399f)
 
+Chapter 9: 
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/20dbc3a5-cca2-4b72-90fe-ab07899e195b)
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/696af774-b1ed-4c0d-a4da-ef0ba1a06573)
+
+
 pip install list:
 
 python -m venv venv
