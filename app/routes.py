@@ -3,7 +3,8 @@ from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app import app, db
 from app.models import Usuario, Post
-from app.forms import LoginForm, RegistrarForm, EditarPerfilForm, EmptyForm, PostForm
+from app.forms import LoginForm, RegistrarForm, EditarPerfilForm, EmptyForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
+from app.email import send_password_reset_email
 from urllib.parse import urlsplit
 from datetime import datetime, timezone
 
@@ -164,3 +165,33 @@ def unfollow(nombreUsuario):
         return redirect(url_for('index', nombreUsuario=nombreUsuario))
     else:
         return redirect(url_for('index'))
+
+@app.route('/reset_password_request', methods=['GET','POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = ResetPasswordRequestForm()
+    if form.validate_on_submit():
+        usuario = db.session.scalar(
+            sa.select(Usuario).where(Usuario.correo == form.email.data))
+        if usuario:
+            send_password_reset_email(usuario)
+        flash('Check your email for the instructions to reset your password')
+        return redirect(url_for('login'))
+    return render_template('reset_password_request.html',
+                            title='Reset Password', form=form)
+
+@app.route('/reset_password/<token>', methods = ['GET','POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    usuario = Usuario.verify_reset_password_token(token)
+    if not usuario:
+        return redirect(url_for('index'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        usuario.set_contrasena(form.contrasena.data)
+        db.session.commit()
+        flash('Tu contraseña a sido cambiada.')
+        return redirect(url_for('login'))
+    return render_template('reset_password.html', form = form)

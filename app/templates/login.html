@@ -21,6 +21,11 @@
         <p>{{ form.recuerda_me() }} {{ form.recuerda_me.label }}</p>
         <p>Nuevo usuario? <a href="{{ url_for("registrar") }}">Crea una sesion nueva</a></p>
         <p>{{ form.enviar() }}</p>
+        <br>
+        <p>
+            se te olvido tu contraseña ? 
+            <a href="{{ url_for('reset_password_request') }}">Reinicio de contraseña </a>
+        </p>
     </form>
 
 {% endblock %}

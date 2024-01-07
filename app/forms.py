@@ -49,3 +49,13 @@ class EmptyForm(FlaskForm):
 class PostForm(FlaskForm):
     post = TextAreaField("En que estas pensando ?" , validators=[DataRequired(), Length(min = 1, max = 140)])
     enviar = SubmitField("Enviar")
+
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField('correo', validators=[DataRequired(), Email()])
+    enviar = SubmitField('Confirmar reseteo de contraseña')
+
+class ResetPasswordForm(FlaskForm):
+    contrasena = PasswordField('Contraseña', validators=[DataRequired()])
+    contrasena2 = PasswordField(
+        'Repite la contraseña', validators=[DataRequired(), EqualTo('contrasena')])
+    enviar = SubmitField('Cambio de contraseña')
