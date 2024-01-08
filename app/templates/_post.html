@@ -1,11 +1,17 @@
-<table>
-    <tr valign = "top">
-        <td><img src="{{ post.autor.avatar(36)}}" alt="{{ post.autor.nombreUsuario }}"></td>
+<table class="table table-hover">
+    <tr>
+        <td width = "70px">
+            <a href="{{ url_for('usuario', nombreUsuario = post.autor.nombreUsuario )}}">
+                <img src="{{ post.autor.avatar(70) }}" alt="{{ post.autor.avatar(70) }}" />
+            </a>
+        </td>
         <td>
             <a href="{{ url_for('usuario', nombreUsuario = post.autor.nombreUsuario) }}">
                 {{ post.autor.nombreUsuario }}
             </a>
-            dice: <br>{{ post.contenido }}
+            dice:
+            <br>
+            {{ post.contenido }}
         </td>
     </tr>
 </table>

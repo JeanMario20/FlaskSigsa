@@ -1,37 +1,7 @@
 {% extends "base.html" %}
+{% import 'boostrap.html' as wtf %}
 
 {% block content %}
-    <h1>Register</h1>
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.nombreUsuario.label }}<br>
-            {{ form.nombreUsuario(size=32) }}<br>
-            {% for error in form.nombreUsuario.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.correo.label }}<br>
-            {{ form.correo(size=64) }}<br>
-            {% for error in form.correo.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.contrasena.label }}<br>
-            {{ form.contrasena(size=32) }}<br>
-            {% for error in form.contrasena.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.contrasena2.label }}<br>
-            {{ form.contrasena2(size=32) }}<br>
-            {% for error in form.contrasena2.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.enviar() }}</p>
-    </form>
-{% endblock %}
+    <h1>Registrarse</h1>
+    {{ wtf.quick_form(form) }}
+    {% endblock %}
