@@ -6,7 +6,7 @@
             <td>
                 <h1>Usuario: {{usuario.nombreUsuario }}</h1>
                 {% if usuario.acerca_mi %} <p> {{ usuario.acerca_mi }}</p>{% endif %}
-                {% if usuario.ultima_conexion %} <p>Ultima conexion: {{ usuario.ultima_conexion }}</p>{% endif %}
+                {% if usuario.ultima_conexion %} <p>Ultima conexion: {{ moment(usuario.ultima_conexion).format('LLL') }}</p>{% endif %}
                 <p>{{ usuario.followers_count() }} Followers, {{ usuario.following_count() }} followings</p>
                 {% if usuario == current_user %}
                 <p><a href="{{ url_for('editar_perfil') }}">Editar perfil</a></p>

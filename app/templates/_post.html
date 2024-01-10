@@ -9,9 +9,10 @@
             <a href="{{ url_for('usuario', nombreUsuario = post.autor.nombreUsuario) }}">
                 {{ post.autor.nombreUsuario }}
             </a>
-            dice:
             <br>
-            {{ post.contenido }}
+            dice: {{ post.contenido }} 
+            <br>
+            Hace {{ moment(post.tiempo_publicado).fromNow() }}
         </td>
     </tr>
 </table>
