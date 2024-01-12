@@ -10,9 +10,9 @@
                 {{ post.autor.nombreUsuario }}
             </a>
             <br>
-            dice: {{ post.contenido }} 
+            {{ _('dice') }}: {{ post.contenido }} 
             <br>
-            Hace {{ moment(post.tiempo_publicado).fromNow() }}
+            {{ _('Hace') }} {{ moment(post.tiempo_publicado).fromNow() }}
         </td>
     </tr>
 </table>

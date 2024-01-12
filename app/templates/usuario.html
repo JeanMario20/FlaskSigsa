@@ -4,12 +4,12 @@
         <tr valign = "top">
             <td><img src="{{ usuario.avatar(128) }}" alt="avatar"></td>
             <td>
-                <h1>Usuario: {{usuario.nombreUsuario }}</h1>
+                <h1>{{ _('Usuario') }}: {{usuario.nombreUsuario }}</h1>
                 {% if usuario.acerca_mi %} <p> {{ usuario.acerca_mi }}</p>{% endif %}
-                {% if usuario.ultima_conexion %} <p>Ultima conexion: {{ moment(usuario.ultima_conexion).format('LLL') }}</p>{% endif %}
-                <p>{{ usuario.followers_count() }} Followers, {{ usuario.following_count() }} followings</p>
+                {% if usuario.ultima_conexion %} <p>{{_('Ultima conexion')}}: {{ moment(usuario.ultima_conexion).format('LLL') }}</p>{% endif %}
+                <p>{{ usuario.followers_count() }} {{ _('seguidos') }}:, {{ usuario.following_count() }} {{ _('seguidores') }}</p>
                 {% if usuario == current_user %}
-                <p><a href="{{ url_for('editar_perfil') }}">Editar perfil</a></p>
+                <p><a href="{{ url_for('editar_perfil') }}">{{ _('Editar perfil') }}</a></p>
                 {% elif not current_user.is_following(usuario) %}
                 <p>
                     <form action="{{ url_for('follow', nombreUsuario = usuario.nombreUsuario) }}" method="post">
@@ -28,16 +28,16 @@
             </td>
         </tr>
     </table>
-    <h1> Usuario: {{ usuario.nombreUsuario }}</h1>
+    <h1> {{ _(Usuario) }}: {{ usuario.nombreUsuario }}</h1>
     <hr>
     {% for post in posts %}
         {% include '_post.html' %}
     {% endfor %}
     {% if prev_url %}
-    <a href="{{ prev_url }}">nuevos posts </a>
+    <a href="{{ prev_url }}">{{ _('nuevos posts') }} </a>
     {% endif %}
     {% if next_url %}
-    <a href="{{ next_url }}">Viejos posts </a>
+    <a href="{{ next_url }}">{{ _('Viejos posts') }} </a>
     {% endif %}
 {% endblock %}
 

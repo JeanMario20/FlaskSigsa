@@ -1,31 +1,11 @@
 {% extends "base.html "%}
-
+{% import "boostrap.html" as wtf %}
 {% block content %}
-    <h1>iniciar sesion</h1>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.nombreUsuario.label }}
-            {{ form.nombreUsuario(size=32)}}
-            {% for error in form.nombreUsuario.errors %}
-            <span style="color:red";>[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.contrasena.label }}
-            {{ form.contrasena(size=32) }}
-            {% for error in form.contrasena.errors %}
-            <span style="color:red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.recuerda_me() }} {{ form.recuerda_me.label }}</p>
-        <p>Nuevo usuario? <a href="{{ url_for("registrar") }}">Crea una sesion nueva</a></p>
-        <p>{{ form.enviar() }}</p>
-        <br>
-        <p>
-            se te olvido tu contraseña ? 
-            <a href="{{ url_for('reset_password_request') }}">Reinicio de contraseña </a>
-        </p>
-    </form>
-
+    <h1>{{ _('iniciar sesion') }}</h1>
+    {{ wtf.quick_form(form) }}
+    <p>{{ _('no tienes una cuenta?') }} <a href="{{ url_for('registrar') }}">{{ _('click aqui para crear un nuevo usuario!') }}</a></p>
+    <p>
+        {{ _('olvidaste tu contraseña') }}
+        <a href="{{ url_for('reset_password_request') }}">{{ _('click aqui para cambiar contraseña') }}</a>
+    </p>
 {% endblock %}
