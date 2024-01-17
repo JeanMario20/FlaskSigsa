@@ -60,6 +60,22 @@ Chapter 9:
 
 ![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/696af774-b1ed-4c0d-a4da-ef0ba1a06573)
 
+Chapter 10
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/a0ef9b03-3a3a-48db-8a6b-0ec0c450f4db)
+
+Chapter 11
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/52b7c549-95ed-42fa-ae4f-8b1a2304b9d5)
+
+Chapter 12
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/004e7b8c-3de5-4bbc-91d4-2882b1bdcdab)
+
+Cahpter 13
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/4e4a6cd8-b007-4b9a-8967-23020775ebd1)
+
 
 pip install list:
 
