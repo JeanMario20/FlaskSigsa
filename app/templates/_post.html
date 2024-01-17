@@ -1,13 +1,13 @@
 <table class="table table-hover">
     <tr>
         <td width = "70px">
-            <a href="{{ url_for('usuario', nombreUsuario = post.autor.nombreUsuario )}}">
+            <a href="{{ url_for('main.usuario', nombreUsuario = post.autor.nombreUsuario )}}">
                 <img src="{{ post.autor.avatar(70) }}" alt="{{ post.autor.avatar(70) }}" />
             </a>
         </td>
         <td>
             {% set user_link %}
-            <a href="{{ url_for('usuario', nombreUsuario = post.autor.nombreUsuario) }}">
+            <a href="{{ url_for('main.usuario', nombreUsuario = post.autor.nombreUsuario) }}">
                 {{ post.autor.nombreUsuario }}
             </a>
             {% endset %}

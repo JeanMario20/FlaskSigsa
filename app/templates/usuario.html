@@ -9,19 +9,19 @@
                 {% if usuario.ultima_conexion %} <p>{{_('Ultima conexion')}}: {{ moment(usuario.ultima_conexion).format('LLL') }}</p>{% endif %}
                 <p>{{ usuario.followers_count() }} {{ _('seguidos') }}:, {{ usuario.following_count() }} {{ _('seguidores') }}</p>
                 {% if usuario == current_user %}
-                <p><a href="{{ url_for('editar_perfil') }}">{{ _('Editar perfil') }}</a></p>
+                <p><a href="{{ url_for('main.editar_perfil') }}">{{ _('Editar perfil') }}</a></p>
                 {% elif not current_user.is_following(usuario) %}
                 <p>
-                    <form action="{{ url_for('follow', nombreUsuario = usuario.nombreUsuario) }}" method="post">
+                    <form action="{{ url_for('main.follow', nombreUsuario = usuario.nombreUsuario) }}" method="post">
                         {{ form.hidden_tag() }}
                         {{ form.enviar(value= 'follow')}}
                     </form>
                 </p>
                 {% else %}
                 <p>
-                    <form action="{{ url_for('unfollow', nombreUsuario = usuario.nombreUsuario) }}" method="post">
+                    <form action="{{ url_for('main.unfollow', nombreUsuario = usuario.nombreUsuario) }}" method="post">
                         {{ form.hidden_tag() }}
-                        {{ form.enviar(value= 'unfollow')}}
+                        {{ form.enviar(value= 'main.unfollow')}}
                     </form>
                 </p>
                 {% endif%}
