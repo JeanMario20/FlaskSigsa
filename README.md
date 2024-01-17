@@ -72,10 +72,12 @@ Chapter 12
 
 ![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/004e7b8c-3de5-4bbc-91d4-2882b1bdcdab)
 
-Cahpter 13
+Chapter 13
 
 ![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/4e4a6cd8-b007-4b9a-8967-23020775ebd1)
 
+Chapter 14: 
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/3944a9b6-75f1-4c96-8f2b-1b2a6a9280a7)
 
 pip install list:
 
