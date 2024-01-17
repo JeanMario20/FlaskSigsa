@@ -27,7 +27,7 @@ mail = Mail()
 login.login_view = 'login'
 mail.init_app(app)
 moment = Moment(app)
-babel = Babel(app, locale_selector = get_locale)
+babel = Babel(app, locale_selector=get_locale)
 
 
 if not app.debug:

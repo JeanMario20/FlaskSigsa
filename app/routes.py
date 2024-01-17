@@ -4,10 +4,13 @@ from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app import app, db
 from app.models import Usuario, Post
+from app.translate import translate
 from app.forms import LoginForm, RegistrarForm, EditarPerfilForm, EmptyForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
 from app.email import send_password_reset_email
 from urllib.parse import urlsplit
 from datetime import datetime, timezone
+from langdetect import detect, LangDetectException
+
 
 @app.before_request
 def before_request():
@@ -23,7 +26,11 @@ def before_request():
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(contenido = form.post.data, autor = current_user)
+        try:
+            Idioma  = detect(form.post.data)
+        except LangDetectException:
+            Idioma  = ''
+        post = Post(contenido = form.post.data, autor = current_user, Idioma  = Idioma )
         db.session.add(post)
         db.session.commit()
         flash("Tu contenido a sido subido ahora se muestra a todo el mundo")
@@ -203,3 +210,9 @@ def reset_password(token):
         flash('Tu contraseña a sido cambiada.')
         return redirect(url_for('login'))
     return render_template('reset_password.html', form = form)
+
+@app.route('/translate', methods=['POST'])
+@login_required
+def translate_text():
+    data = request.get_json()
+    return {'text': translate(data['text'], data['source_language'], data['dest_language'])}

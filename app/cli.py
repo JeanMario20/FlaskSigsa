@@ -4,9 +4,10 @@ import click
 
 @app.cli.group()
 def translate():
+    """Translation and localization commands."""
     pass
 
-@translate.commad()
+@translate.command()
 def update():
     """actualiza todos los idiomas """
     if os.system('pybabel extract -F babel.cfg -k _l -o messages.pot .'):
@@ -25,7 +26,7 @@ def compile():
 @translate.command()
 @click.argument('lang')
 def init(lang):
-    """inicia un nuevo lenguaje"""
+    """Initialize a new language."""
     if os.system('pybabel extract -F babel.cfg -k _l -o messages.pot .'):
         raise RuntimeError('extract command failed')
     if os.system(

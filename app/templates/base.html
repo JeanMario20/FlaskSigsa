@@ -17,30 +17,30 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
-        <a class="navbar-brand" href="{{ url_for('index') }}">Microblog</a>
+        <a class="navbar-brand" href="{{ url_for('index') }}">SisgsaBlog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">{{_('Inicio')}}</a>
+                <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">{{ _('Inicio')}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url_for('explore') }}">{{_('Explorar')}}</a>
+                <a class="nav-link" aria-current="page" href="{{ url_for('explore') }}">{{ _('Explorar')}}</a>
             </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
             {% if current_user.is_anonymous %}
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url_for('login') }}">{{_('Inicio de sesion')}}</a>
+                <a class="nav-link" aria-current="page" href="{{ url_for('login') }}">{{ _('Inicio de sesion')}}</a>
             </li>
             {% else %}
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url_for('usuario', nombreUsuario=current_user.nombreUsuario) }}">Perfil</a>
+                <a class="nav-link" aria-current="page" href="{{ url_for('usuario', nombreUsuario=current_user.nombreUsuario) }}">{{ _(Perfil) }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ url_for('cerrar_sesion') }}">{{_('Cerrar session') }}</a>
+                <a class="nav-link" aria-current="page" href="{{ url_for('cerrar_sesion') }}">{{ _('Cerrar session') }}</a>
             </li>
             {% endif %}
             </ul>
@@ -63,5 +63,23 @@
     crossorigin="anonymous"></script>
     {{ moment.include_moment() }}
     {{ moment.lang(g.locate)}}
+    <script>
+        async function translate(sourceElem, destElem, sourceLang, destLang) {
+            document.getElementById(destElem).innerHTML =
+            '<img src="{{ url_for('static', filename='loading.gif') }}">';
+        const response = await fetch('/translate', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: JSON.stringify({
+            text: document.getElementById(sourceElem).innerText,
+            source_language: sourceLang,
+            dest_language: destLang
+        })
+        })
+        const data = await response.json();
+        console.log(destLang)
+        document.getElementById(destElem).innerText = data.text;
+    }
+    </script>
 </body>
 </html>

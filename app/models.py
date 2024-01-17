@@ -104,6 +104,7 @@ class Post(db.Model):
     # one to many un usuario puede tener muchos posts
     usuario_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Usuario.id), index=True)
     autor: so.Mapped[Usuario] = so.relationship(back_populates='posts')
+    Idioma: so.Mapped[Optional[str]] = so.mapped_column(sa.String(5))
 
     def __repr__(self):
         return '<Post {}>' .format(self.contenido) 

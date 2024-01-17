@@ -6,13 +6,23 @@
             </a>
         </td>
         <td>
+            {% set user_link %}
             <a href="{{ url_for('usuario', nombreUsuario = post.autor.nombreUsuario) }}">
                 {{ post.autor.nombreUsuario }}
             </a>
+            {% endset %}
             <br>
-            {{ _('dice') }}: {{ post.contenido }} 
+            {{ _('%(nombreUsuario)s said %(cuando)s', 
+                nombreUsuario = user_link, cuando = moment(post.tiempo_publicado).fromNow()) }}
             <br>
-            {{ _('Hace') }} {{ moment(post.tiempo_publicado).fromNow() }}
+            <span id="post{{ post.id }}">{{ post.contenido }} </span>
+            <br>
+            {% if post.Idioma and post.Idioma != g.locale %}
+            <br><br>
+            <span id="translation{{ post.id }}">
+                <a href="javascript:translate('post{{ post.id }}','translation{{ post.id }}','{{ post.Idioma }}','{{ g.locale }}');">{{ _('Traducir') }}</a>
+            </span>
+            {% endif %}
         </td>
     </tr>
 </table>
