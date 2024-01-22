@@ -1,26 +1,20 @@
 {% extends "base.html" %}
-{% import "boostrap.html" as wtf %}
-
 
 {% block content %}
-    <h1>{{_('Hola')}}, {{current_user.nombreUsuario}} </h1>
-    {% if form %}
-    {{ wtf.quick_form(form) }}
-    {% endif %}
+    <h1>{{ _('resultado de la busqueda') }}</h1>
     {% for post in posts %}
         {% include '_post.html' %}
     {% endfor %}
-
     <nav aria-label="Post navigation">
         <ul class="pagination">
             <li class="page-item{% if not prev_url %} disabled{% endif %}">
                 <a class="page-link" href="{{ prev_url }}">
-                    <span arial-hidden="true">&larr;</span> {{ _('nuevos posts') }}
+                    <span aria-hidden="true">&larr;</span> {{ _('Nuevos posts') }}
                 </a>
             </li>
             <li class="page-item{% if not next_url %} disabled{% endif %}">
                 <a class="page-link" href="{{ next_url }}">
-                    {{ _('Viejos posts') }}<span arial-hidden="true">&larr;</span>
+                    {{ _('Viejos posts') }} <span aria-hidden="true">&rarr;</span>
                 </a>
             </li>
         </ul>

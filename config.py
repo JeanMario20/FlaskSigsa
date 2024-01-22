@@ -4,7 +4,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.abspath(os.path.dirname(__file__)))
 
 class Config:
-    SECRE_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-know'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-know'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
     POSTS_PER_PAGE = 25
 
@@ -17,3 +17,5 @@ class Config:
 
     LANGUAGES = ['en', 'es']
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
+
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')

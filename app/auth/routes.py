@@ -16,14 +16,14 @@ import pytz
 def login():
     if current_user.is_authenticated:
         print('aqui')
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit():
 
         usuario = db.session.scalar(sa.select(Usuario).where(Usuario.nombreUsuario == form.nombreUsuario.data))
         if usuario is None or not usuario.check_contrasena(form.contrasena.data):
             flash("nombre de usuario o contrasena invalida.")
-            return redirect(url_for('login'))
+            return redirect(url_for('auth.login'))
         login_user(usuario, remember = form.recuerda_me.data)
 
         next_page = request.args.get('next')
@@ -72,7 +72,7 @@ def registrar_ultima_conexion():
 @bp.route('/reset_password_request', methods=['GET','POST'])
 def reset_password_request():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
         usuario = db.session.scalar(
@@ -87,10 +87,10 @@ def reset_password_request():
 @bp.route('/reset_password/<token>', methods = ['GET','POST'])
 def reset_password(token):
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     usuario = Usuario.verify_reset_password_token(token)
     if not usuario:
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
         usuario.set_contrasena(form.contrasena.data)

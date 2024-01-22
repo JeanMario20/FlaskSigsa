@@ -5,6 +5,7 @@ import sqlalchemy as sa
 from flask_babel import _, lazy_gettext as _l
 from app import db
 from app.models import Usuario
+from flask import request
 
 class EditarPerfilForm(FlaskForm):
     nombreUsuario = StringField(_l("Nombre de usuario "), validators=[DataRequired()])
@@ -28,3 +29,13 @@ class EmptyForm(FlaskForm):
 class PostForm(FlaskForm):
     post = TextAreaField(_l("En que estas pensando ?") , validators=[DataRequired(), Length(min = 1, max = 140)])
     enviar = SubmitField(_l("Enviar"))
+
+class SearchForm(FlaskForm):
+    q = StringField( _l('Search'), validators=[DataRequired()])
+
+    def __init__(self, *args, **kwargs):
+        if 'formdata' not in kwargs:
+            kwargs['formdata'] = request.args
+        if 'meta' not in kwargs:
+            kwargs['meta'] = {'csrf': False}
+        super(SearchForm, self).__init__(*args, **kwargs)

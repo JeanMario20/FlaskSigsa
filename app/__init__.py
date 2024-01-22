@@ -9,6 +9,7 @@ from flask_mail import Mail
 from flask_moment import Moment
 from flask_babel import Babel, lazy_gettext as _l
 from config import Config
+from elasticsearch import Elasticsearch
 
 #flask_env
 def get_locale():
@@ -27,6 +28,8 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
     app.secret_key = "super secret key"
+    app.elasticsearch_url = 'http://localhost:9200'
+    app.elasticsearch = Elasticsearch(app.elasticsearch_url) 
     
     db.init_app(app)
     migrate.init_app(app, db)
