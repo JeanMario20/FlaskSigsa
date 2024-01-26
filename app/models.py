@@ -4,6 +4,7 @@ import sqlalchemy as sa
 import sqlalchemy.orm as so
 from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
+import hashlib
 from flask_login import UserMixin
 from flask import current_app
 from hashlib import md5
@@ -62,8 +63,8 @@ followers = sa.Table(
 class Usuario (UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     nombreUsuario: so.Mapped[str] = so.mapped_column(sa.String(64), index=True,unique=True)
-    correo: so.Mapped[str] = so.mapped_column(sa.String(120), index=True, unique=True)
-    contrasena_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(120))
+    correo: so.Mapped[str] = so.mapped_column(sa.String(170), index=True, unique=True)
+    contrasena_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(170))
     #apunta a la llave foranea de la clase post
     posts: so.WriteOnlyMapped['Post'] = so.relationship(back_populates = 'autor')
     acerca_mi: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))

@@ -1,0 +1,24 @@
+#la busqueda de texto correr en un cmd en la carpeta de descargas de elasticsearch
+#localizacion documents/search/elasticsearch-8.12.0/bin
+elasticsearch -E xpack.security.enabled=false
+
+    #correr docker de sigsa con la conexion a la base de datos y elasticSearch
+    docker run --name sigsa -d -p 8000:5000 --rm -e SECRET_KEY=a-really-long-and-unique-key-that-nobody-knows -e MAIL_SERVER=localhost -e MAIL_PORT=8025 -e MAIL_USERNAME=username -e MAIL_PASSWORD=password --network sigsablog-network -e DATABASE_URL=mysql+pymysql://sigsablog:1234@mysql/sigsablog -e ELASTICSEARCH_URL=http://elasticsearch:9200 sigsablog/latest
+    
+    #descargar una image para el docker para las configuraciones del mysql
+    docker run --name mysql -d -e MYSQL_RANDOM_ROOT_PASSWORD=yes -e MYSQL_DATABASE=sigsablog -e MYSQL_USER=sigsablog -e MYSQL_PASSWORD=1234 -p 3306:3306 --network sigsablog-network mysql:latest
+
+    #descargar container para correr el servicio de elasticsearch
+    docker run --name elasticsearch -d --rm -p 9200:9200 -e discovery.type=single-node -e xpack.security.enabled=false --network sigsablog-network -t docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+
+    #si se modifica un archivo y luego se quiere subir el updade al image del docker se usa el siguiente comadno
+    docker build -t microblog:latest .
+    docker build -t <nombre del image> .
+
+    #connect
+    docker network create sigsa-network
+
+    #conectar a base de datos mysql
+    docker exec -it mysql bash
+    mysql -u root -p #poner password random que arroja en dockers
+    USE sigsablog #tablename
