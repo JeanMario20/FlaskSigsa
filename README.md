@@ -81,7 +81,8 @@ Chapter 14:
 
 Docker 
 
-![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/03a6ea32-ffaa-43cf-ac6a-d54ec4394083)
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/54458401-db22-4745-bb3d-d808ef0659a0)
+
 
 pip install list:
 
