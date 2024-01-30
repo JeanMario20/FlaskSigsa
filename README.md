@@ -79,6 +79,11 @@ Chapter 13
 Chapter 14: 
 ![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/3944a9b6-75f1-4c96-8f2b-1b2a6a9280a7)
 
+Docker 
+
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/54458401-db22-4745-bb3d-d808ef0659a0)
+
+
 pip install list:
 
 python -m venv venv
