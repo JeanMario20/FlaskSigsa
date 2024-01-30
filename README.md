@@ -83,23 +83,7 @@ Docker
 
 ![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/54458401-db22-4745-bb3d-d808ef0659a0)
 
-
-pip install list:
-
-python -m venv venv
-pip install flask
-
-pip install flask_migrate
-
-pip install flask_login
-
-pip install flask_login
-
-pip install flask_wtf
+Chapter 20:
+![image](https://github.com/JeanMario20/FlaskSigsa/assets/77745930/42fa7fc5-77fc-46fb-9418-85c3b03eda2d)
 
 
-pip install email-validator
-
-pip install flask-sqlalchemy
-pip install flask-migrate
-pip install python-dotenv
