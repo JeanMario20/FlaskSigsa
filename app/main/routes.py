@@ -74,6 +74,14 @@ def usuario(nombreUsuario):
     form = EmptyForm()
     return render_template('usuario.html', usuario=usuario, posts=posts, next_url = next_url, prev_url=prev_url, form = form)
 
+@bp.route('/usuario/<nombreUsuario>/popup')
+@login_required
+def user_popup(nombreUsuario):
+    usuario = db.first_or_404(sa.select(Usuario).where(Usuario.nombreUsuario == nombreUsuario))
+    form = EmptyForm()
+    return render_template('usuario_popup.html', usuario=usuario, form=form)
+
+
 @bp.route('/editar_perfil', methods = ['GET','POST'])
 @login_required
 def editar_perfil():
@@ -105,8 +113,8 @@ def follow(nombreUsuario):
             return redirect(url_for('main.usuario', nombreUsuario=nombreUsuario))
         current_user.follow(nombreUsuario)
         db.session.commit()
-        flash(f'You are following {nombreUsuario}!')
-        return redirect(url_for('main.usuario', nombreUsuario=nombreUsuario))
+        flash(f'estas siguiendo {nombreUsuario} !')
+        return redirect(url_for('main.index', nombreUsuario=nombreUsuario))
     else:
         return redirect(url_for('main.index'))
 
@@ -125,8 +133,8 @@ def unfollow(nombreUsuario):
             return redirect(url_for('main.usuario', nombreUsuario=nombreUsuario))
         current_user.unfollow(nombreUsuario)
         db.session.commit()
-        flash(_(f'no estas siguiendo a{nombreUsuario}.'))
-        return redirect(url_for('main.usuario', nombreUsuario=nombreUsuario))
+        flash(_(f'dejaste de seguir a{nombreUsuario}.'))
+        return redirect(url_for('main.index', nombreUsuario=nombreUsuario))
     else:
         return redirect(url_for('main.index'))
 

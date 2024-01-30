@@ -7,7 +7,7 @@
         </td>
         <td>
             {% set user_link %}
-            <a href="{{ url_for('main.usuario', nombreUsuario = post.autor.nombreUsuario) }}">
+            <a class="user_popup" href="{{ url_for('main.usuario', nombreUsuario = post.autor.nombreUsuario) }}">
                 {{ post.autor.nombreUsuario }}
             </a>
             {% endset %}
