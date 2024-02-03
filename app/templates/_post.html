@@ -12,10 +12,15 @@
             </a>
             {% endset %}
             <br>
-            {{ _('%(nombreUsuario)s said %(cuando)s', 
-                nombreUsuario = user_link, cuando = moment(post.tiempo_publicado).fromNow()) }}
+            {% if post.tiempo_publicado %}
+                {{ _('%(nombreUsuario)s dijo %(cuando)s', 
+                    nombreUsuario = user_link, cuando = moment(post.tiempo_publicado).fromNow()) }}
+            {% else %}
+            {{ _('%(nombreUsuario)s dijo %(cuando)s', 
+            nombreUsuario = user_link, cuando = moment(post.timestamp).fromNow()) }}
             <br>
-            <span id="post{{ post.id }}">{{ post.contenido }} </span>
+            {% endif %}
+            <span id="post{{ post.id }}">{{ post.body }} </span>
             <br>
             {% if post.Idioma and post.Idioma != g.locale %}
             <br><br>
